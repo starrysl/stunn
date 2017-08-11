@@ -14,8 +14,8 @@ Requirements
 4. OpenSSH (`sudo apt install openssh-server`)
 5. (Optional) Screen (`sudo apt install screen`)
 
-Configurations
---------------
+Customize configurations
+------------------------
 Rename "ssh-forward.conf.example" to "ssh-forward.conf", and modify it according to your server settings.
 
 SSH public key settings
@@ -23,9 +23,11 @@ SSH public key settings
 If you want password-less connection, please create an SSH key pairs on the local machine and send the public key to the remote server (steps as follows). If not, every time you start the service, you need to specify the password on the remote server.
 
 Steps to set up SSH password-less connection:
+
 1. On the local server, run `ssh-keygen -t rsa 2048`. Then press enter until it is fully executed.
 2. There will be two files "id\_rsa" and "id\_rsa.pub" located in $HOME/.ssh/ folder. Send the public key "id\_rsa.pub" to your remote server by running `scp $HOME/.ssh/id_rsa.pub $REMOTE_USERNAME@$REMOTE_SERVER_IP:~/local_pubkey.pub`
 3. SSH to the remote server, and run `mkdir -p ~/.ssh; cat ~/local_pubkey.pub >> ~/.ssh/authorized_keys`
+
 Wala, now you can SSH to the remote machine from you local one without password prompts.
  
 Start the service
@@ -37,3 +39,4 @@ Connect the local server outside the internal network
 Just run `ssh $REMOTE_USERNAME@$REMOTE_SERVER_IP -p 8848` to connect to the server hidden inside an internal network.
 
 Enjoy!
+------
